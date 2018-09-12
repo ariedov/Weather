@@ -2,9 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:weather/header_painter.dart';
+import 'package:weather/background_painter.dart';
 
 class BackgroundWidget extends StatefulWidget {
+
+  final double headerHeight;
+
+  const BackgroundWidget(this.headerHeight, {Key key}) : super(key: key);
+
   _BackgroundWidgetState createState() => new _BackgroundWidgetState();
 }
 
@@ -24,40 +29,31 @@ class _BackgroundWidgetState extends State<BackgroundWidget>
       });
     var beginOffset = new Offset(290.0, 0.0);
     var endOffset = _getEndOffset(beginOffset);
-    animationStarOffset =
-        new Tween<Offset>(begin: beginOffset, end: endOffset).animate(controller);
+    animationStarOffset = new Tween<Offset>(begin: beginOffset, end: endOffset)
+        .animate(controller);
     controller.forward();
   }
 
   Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Colors.white,
-      body: new Stack(
-        alignment: new Alignment(0.5, 0.94),
-        children: <Widget>[
-          new CustomPaint(
-            painter:
-                new HeaderPainter(animation.value, animationStarOffset.value),
-            child: new Container(height: 345.0),
-          ),
-          new Image.asset(
-            'assets/reindeer.png',
-            scale: 15.0,
-          ),
-        ],
-      ),
+    return Stack(
+      alignment: new Alignment(0.5, 0.94),
+      children: <Widget>[
+        new CustomPaint(
+          painter:
+              new BackgroundPainter(animation.value, animationStarOffset.value),
+          child: new Container(height: widget.headerHeight),
+        ),
+        new Image.asset(
+          'assets/reindeer.png',
+          scale: 15.0,
+        ),
+      ],
     );
   }
 
   dispose() {
     controller.dispose();
     super.dispose();
-  }
-
-  _getRandomBeginOffset() {
-    var dy = 0.0;
-    var dx = new Random().nextInt(345).toDouble();
-    return new Offset(dx, dy);
   }
 
   _getEndOffset(Offset beginOffset) {

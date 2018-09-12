@@ -4,7 +4,7 @@ import 'package:weather/daily_forecast.dart';
 import 'package:weather/utils.dart';
 
 class OpenWeatherAPI {
-  final key = 'YOUR_OPENWEATHER_API_KEY';
+  final key = '8f813533a0fa2d873acc6a73cce9e9fe';
 
   Future<Map<String, dynamic>> _getData(String api, double lat, double lon,
       [int cnt]) async {

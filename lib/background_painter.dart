@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class HeaderPainter extends CustomPainter {
-  HeaderPainter(this.animationValue, this.firstStarOffset);
+class BackgroundPainter extends CustomPainter {
+  BackgroundPainter(this.animationValue, this.firstStarOffset);
 
   final double animationValue;
   final Offset firstStarOffset;
@@ -229,6 +229,6 @@ class HeaderPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(HeaderPainter oldDelegate) =>
+  bool shouldRepaint(BackgroundPainter oldDelegate) =>
       oldDelegate.animationValue != animationValue || oldDelegate.firstStarOffset != firstStarOffset;
 }
